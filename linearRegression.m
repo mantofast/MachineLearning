@@ -10,8 +10,10 @@ function  linearRegression(x,y,z)
 % time from the top of the moutain
 % delta is the erro that you can bare 
 n=length(x(1,:));
-theta=ones(n,1);
+theta=ones(n+1,1);
 m=length(y);
+x0=ones(m,1);
+x=[x0,x];
 alpha=0.1;
 delta=1;
 while(delta>0.00001)
@@ -21,13 +23,14 @@ while(delta>0.00001)
           theta(j)=theta(j)-alpha*(theta'*x(i,:)'-y(i))*x(i,j);
         end
     end
+    %cost function, erro
     for i=1:m
-      delta=+(theta'*x(i,:)'-y(i))^2;
+      delta=+(theta'*x(i,:)'-y(i))^2/2/m;
     end
    % delta;
 end
+theta'*[1,z]'
 
-theta'*z'
 
 
 
